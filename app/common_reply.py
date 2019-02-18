@@ -36,8 +36,7 @@ aqi_status_pattern = re.compile(r'^空品現況\s+.+')
 choice_pattern = re.compile(
     r"""choice\s?  # choice + 0~1 space
     \[             # [
-    [^,\[\]]+      # not start with , [, ] (at least once)
-    (,[^,\[\]]+)+  # plus dot (at least once)
+    .*
     ]              # ]
     """, re.VERBOSE | re.IGNORECASE)
 pattern_mapping = [
@@ -168,9 +167,10 @@ def common_reply(source_id, msg):
                     return build_complex_msg(result)
                 else:
                     return [TextSendMessage(text=result)]
-
+    
         elif p['type'] == 'search':
             match = p['cmd'].search(msg)
+            print(f"{p['cmd']} {match}")
             if match:
                 if p.get('matched_as_arg', False):
                     result = p['function'](match.group(0))

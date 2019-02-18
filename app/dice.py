@@ -2,7 +2,7 @@ import random
 import json
 import logging
 
-tarot_cards = json.load(open('app/tarot.json'))
+tarot_cards = json.load(open('app/tarot.json',encoding ='utf8'))
 
 
 def tarot():
@@ -71,8 +71,8 @@ def nca():
 
 
 def choice(matched_msg):
-    options_str = matched_msg.split('[')[1][:-1]
-    options = options_str.split(',')
+    options_str = matched_msg[7:-1]
+    options = list(filter(None,options_str.split(',')))
     result = f'自訂選項：[{",".join(options)}] → {random.choice(options)}'
     return result
 
