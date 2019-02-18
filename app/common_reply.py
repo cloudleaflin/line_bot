@@ -167,10 +167,8 @@ def common_reply(source_id, msg):
                     return build_complex_msg(result)
                 else:
                     return [TextSendMessage(text=result)]
-    
         elif p['type'] == 'search':
             match = p['cmd'].search(msg)
-            print(f"{p['cmd']} {match}")
             if match:
                 if p.get('matched_as_arg', False):
                     result = p['function'](match.group(0))
