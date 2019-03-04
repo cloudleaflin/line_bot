@@ -101,7 +101,7 @@ class StreamLister:
             try:
                 twitch_stream_notify()      
             except Exception as e:
-                print(type(e), str(e))
+                logging.exception("type(e): %s, str(e): %s", type(e), str(e))
             finally:
                 time.sleep(15)
             
